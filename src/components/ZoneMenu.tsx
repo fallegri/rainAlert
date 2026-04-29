@@ -18,7 +18,7 @@ export default function ZoneMenu({ zones, selectedZoneId, onZoneSelect, fallback
       </div>
 
       <div className="zone-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-        {zones.slice(0, 4).map((zone) => (
+        {zones.map((zone) => (
           <button
             key={zone.id}
             type="button"

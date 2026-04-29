@@ -63,6 +63,20 @@ export function calcFinalVerdict(userETA: number, stormETA: number, aligned: boo
   return 'PISO MOJADO';
 }
 
+export function destinationPoint(origin: LatLng, distanceKm: number, bearingDeg: number): LatLng {
+  const R = 6371; // Earth's radius in km
+  const d = distanceKm / R; // Angular distance
+  const bearing = toRad(bearingDeg);
+
+  const lat1 = toRad(origin.lat);
+  const lng1 = toRad(origin.lng);
+
+  const lat2 = Math.asin(Math.sin(lat1) * Math.cos(d) + Math.cos(lat1) * Math.sin(d) * Math.cos(bearing));
+  const lng2 = lng1 + Math.atan2(Math.sin(bearing) * Math.sin(d) * Math.cos(lat1), Math.cos(d) - Math.sin(lat1) * Math.sin(lat2));
+
+  return { lat: toDeg(lat2), lng: toDeg(lng2) };
+}
+
 export function getWindData(): { dir: number; speed: number } {
   const now = Date.now();
   // Dirección del viento varía cada hora

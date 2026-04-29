@@ -7,7 +7,8 @@ import {
   isAligned,
   calcStormETA,
   calcFinalVerdict,
-  getWindData
+  getWindData,
+  destinationPoint
 } from './geoUtils';
 
 describe('GeoUtils Property-Based Tests', () => {
@@ -196,5 +197,13 @@ describe('GeoUtils Property-Based Tests', () => {
   it('Property 10: getWindData retorna dir en [0, 359] y speed >= 5', () => {
     const wind = getWindData();
     return wind.dir >= 0 && wind.dir < 360 && wind.speed >= 5;
+  });
+
+  // Property 11: destinationPoint calcula correctamente la distancia
+  it('Property 11: destinationPoint produce punto a distancia correcta', () => {
+    const origin = { lat: -17.783, lng: -63.182 };
+    const dest = destinationPoint(origin, 10, 0); // 10km Norte
+    const actualDistance = haversineDistance(origin, dest);
+    expect(Math.abs(actualDistance - 10)).toBeLessThan(0.1);
   });
 });
