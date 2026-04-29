@@ -5,8 +5,6 @@ interface ControlPanelProps {
   windSpeed: number;
   userETA: number;
   isSimulationRunning: boolean;
-  onWindDirChange: (value: number) => void;
-  onWindSpeedChange: (value: number) => void;
   onUserETAChange: (value: number) => void;
   onSimulationStart: () => void;
   onSimulationCancel: () => void;
@@ -17,8 +15,6 @@ export default function ControlPanel({
   windSpeed,
   userETA,
   isSimulationRunning,
-  onWindDirChange,
-  onWindSpeedChange,
   onUserETAChange,
   onSimulationStart,
   onSimulationCancel
@@ -26,37 +22,19 @@ export default function ControlPanel({
   return (
     <section>
       <h2>Controles</h2>
+      <div className="info-group">
+        <div className="field">
+          <label>
+            Dirección del viento: <span>{windDir}°</span>
+          </label>
+        </div>
+        <div className="field">
+          <label>
+            Velocidad del viento: <span>{windSpeed} km/h</span>
+          </label>
+        </div>
+      </div>
       <div className="slider-group">
-        <div className="field">
-          <label>
-            Dirección del viento <span>{windDir}°</span>
-          </label>
-          <input
-            type="range"
-            min="0"
-            max="360"
-            value={windDir}
-            step="1"
-            onChange={(event) => onWindDirChange(Number(event.target.value))}
-            disabled={isSimulationRunning}
-          />
-        </div>
-
-        <div className="field">
-          <label>
-            Velocidad del viento <span>{windSpeed} km/h</span>
-          </label>
-          <input
-            type="range"
-            min="0"
-            max="150"
-            value={windSpeed}
-            step="1"
-            onChange={(event) => onWindSpeedChange(Number(event.target.value))}
-            disabled={isSimulationRunning}
-          />
-        </div>
-
         <div className="field">
           <label>
             Tiempo de llegada <span>{userETA} min</span>

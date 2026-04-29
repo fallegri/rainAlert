@@ -62,3 +62,12 @@ export function calcFinalVerdict(userETA: number, stormETA: number, aligned: boo
 
   return 'PISO MOJADO';
 }
+
+export function getWindData(): { dir: number; speed: number } {
+  const now = Date.now();
+  // Dirección del viento varía cada hora
+  const dir = (now / 1000 / 60 / 60) % 360;
+  // Velocidad varía diariamente con un patrón sinusoidal
+  const speed = 20 + 10 * Math.sin(now / 1000 / 60 / 60 / 24 * 2 * Math.PI);
+  return { dir: Math.round(dir), speed: Math.max(5, Math.round(speed)) };
+}

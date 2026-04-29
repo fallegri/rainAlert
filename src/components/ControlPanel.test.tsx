@@ -3,10 +3,8 @@ import { render, screen } from '@testing-library/react';
 import ControlPanel from './ControlPanel';
 
 describe('ControlPanel Component', () => {
-  it('renders all sliders', () => {
+  it('renders wind info and ETA slider', () => {
     const mockHandlers = {
-      onWindDirChange: () => {},
-      onWindSpeedChange: () => {},
       onUserETAChange: () => {},
       onSimulationStart: () => {},
       onSimulationCancel: () => {}
@@ -22,15 +20,13 @@ describe('ControlPanel Component', () => {
       />
     );
 
-    expect(screen.getByDisplayValue('180')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('25')).toBeInTheDocument();
+    expect(screen.getByText('180°')).toBeInTheDocument();
+    expect(screen.getByText('25 km/h')).toBeInTheDocument();
     expect(screen.getByDisplayValue('30')).toBeInTheDocument();
   });
 
-  it('disables sliders when simulation is running', () => {
+  it('disables ETA slider when simulation is running', () => {
     const mockHandlers = {
-      onWindDirChange: () => {},
-      onWindSpeedChange: () => {},
       onUserETAChange: () => {},
       onSimulationStart: () => {},
       onSimulationCancel: () => {}
@@ -46,10 +42,8 @@ describe('ControlPanel Component', () => {
       />
     );
 
-    let inputs = screen.getAllByRole('slider');
-    inputs.forEach((input) => {
-      expect(input).not.toBeDisabled();
-    });
+    let input = screen.getByRole('slider');
+    expect(input).not.toBeDisabled();
 
     rerender(
       <ControlPanel
@@ -61,16 +55,12 @@ describe('ControlPanel Component', () => {
       />
     );
 
-    inputs = screen.getAllByRole('slider');
-    inputs.forEach((input) => {
-      expect(input).toBeDisabled();
-    });
+    input = screen.getByRole('slider');
+    expect(input).toBeDisabled();
   });
 
   it('shows correct button text based on isSimulationRunning', () => {
     const mockHandlers = {
-      onWindDirChange: () => {},
-      onWindSpeedChange: () => {},
       onUserETAChange: () => {},
       onSimulationStart: () => {},
       onSimulationCancel: () => {}

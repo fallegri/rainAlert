@@ -6,7 +6,8 @@ import {
   angularDiff,
   isAligned,
   calcStormETA,
-  calcFinalVerdict
+  calcFinalVerdict,
+  getWindData
 } from './geoUtils';
 
 describe('GeoUtils Property-Based Tests', () => {
@@ -189,5 +190,11 @@ describe('GeoUtils Property-Based Tests', () => {
       ),
       { numRuns: 50 }
     );
+  });
+
+  // Property 10: getWindData retorna valores válidos
+  it('Property 10: getWindData retorna dir en [0, 359] y speed >= 5', () => {
+    const wind = getWindData();
+    return wind.dir >= 0 && wind.dir < 360 && wind.speed >= 5;
   });
 });

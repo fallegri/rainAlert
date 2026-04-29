@@ -6,7 +6,7 @@ import ControlPanel from '../components/ControlPanel';
 import ResultsPanel from '../components/ResultsPanel';
 import ZoneMenu from '../components/ZoneMenu';
 import { FALLBACK_ZONES, SCZ_CENTER } from '../lib/constants';
-import { calcBearing, calcFinalVerdict, calcStormETA, isAligned } from '../lib/geoUtils';
+import { calcBearing, calcFinalVerdict, calcStormETA, isAligned, getWindData } from '../lib/geoUtils';
 import type { ActiveWeatherZone, FinalVerdict, LatLng } from '../types';
 import { useRadarAnimation } from '../hooks/useRadarAnimation';
 
@@ -26,6 +26,17 @@ export default function HomePage() {
     () => ({ lat: selectedZone.latitude, lng: selectedZone.longitude }),
     [selectedZone]
   );
+
+  useEffect(() => {
+    const updateWind = () => {
+      const wind = getWindData();
+      setWindDir(wind.dir);
+      setWindSpeed(wind.speed);
+    };
+    updateWind();
+    const interval = setInterval(updateWind, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, []);
 
   const { particles, start, cancel } = useRadarAnimation({
     pointA,
@@ -162,8 +173,6 @@ export default function HomePage() {
               windSpeed={windSpeed}
               userETA={userETA}
               isSimulationRunning={isSimulationRunning}
-              onWindDirChange={setWindDir}
-              onWindSpeedChange={setWindSpeed}
               onUserETAChange={setUserETA}
               onSimulationStart={handleSimulationStart}
               onSimulationCancel={handleSimulationCancel}
