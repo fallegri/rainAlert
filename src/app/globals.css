@@ -1,0 +1,187 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #020617 0%, #101827 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.page-grid {
+  display: grid;
+  gap: 24px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.grid-2 {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .page-grid {
+    grid-template-columns: 1.4fr 0.9fr;
+  }
+}
+
+.slider-group {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: #cbd5e1;
+}
+
+input[type='range'] {
+  width: 100%;
+}
+
+button.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  color: #0f172a;
+  background: #facc15;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button.secondary {
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: transparent;
+  color: #e2e8f0;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status-badge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.zone-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.zone-button {
+  width: 100%;
+  background: rgba(30, 41, 59, 0.9);
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zone-button.active {
+  border-color: #facc15;
+  background: rgba(250, 204, 21, 0.1);
+}
+
+.result-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.result-strong {
+  color: #f8fafc;
+}
+
+.result-card {
+  display: grid;
+  gap: 12px;
+}
+
+.result-card p {
+  margin: 0;
+}
+
+.result-cta {
+  display: grid;
+  gap: 8px;
+}
+
+.map-wrapper {
+  min-height: 540px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
