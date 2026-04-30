@@ -8,7 +8,7 @@ export const OVERLAP_DURATION_MIN = 45;
 export const WEATHER_ICON_MAP: Record<string, string> = {
   Lluvia: '🌧️',
   Nublado: '☁️',
-  Soleado: '☀️',
+  Despejado: '☀️',
   Tormenta: '⛈️',
   'Viento Fuerte': '🌬️'
 };
@@ -35,19 +35,19 @@ const CENTRAL_ZONE: ActiveWeatherZone = {
   zone_name: 'Central Santa Cruz de la Sierra',
   latitude: SCZ_CENTER.lat,
   longitude: SCZ_CENTER.lng,
-  current_condition: 'Soleado',
+  current_condition: 'Despejado',
   last_updated: ''
 };
 
 const CARDINAL_POINTS = [
   { name: 'Norte', bearing: 0, condition: 'Lluvia' },
   { name: 'Noreste', bearing: 45, condition: 'Nublado' },
-  { name: 'Este', bearing: 90, condition: 'Soleado' },
+  { name: 'Este', bearing: 90, condition: 'Despejado' },
   { name: 'Sureste', bearing: 135, condition: 'Tormenta' },
   { name: 'Sur', bearing: 180, condition: 'Lluvia' },
   { name: 'Suroeste', bearing: 225, condition: 'Nublado' },
   { name: 'Oeste', bearing: 270, condition: 'Tormenta' },
-  { name: 'Noroeste', bearing: 315, condition: 'Soleado' }
+  { name: 'Noroeste', bearing: 315, condition: 'Despejado' }
 ];
 
 export const FALLBACK_ZONES: ActiveWeatherZone[] = [
