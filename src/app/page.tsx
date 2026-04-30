@@ -27,6 +27,9 @@ export default function HomePage() {
     [selectedZone]
   );
 
+  const chooseDefaultZone = (zones: ActiveWeatherZone[]) =>
+    zones.find((zone) => zone.id === 'central' || zone.zone_name.includes('Central')) ?? zones[0];
+
   useEffect(() => {
     const updateWind = () => {
       const wind = getWindData();
@@ -57,13 +60,13 @@ export default function HomePage() {
       .then((data) => {
         if (Array.isArray(data.zones) && data.zones.length > 0) {
           setZones(data.zones);
-          setSelectedZone(data.zones[0]);
+          setSelectedZone(chooseDefaultZone(data.zones));
           setIsFallback(data.source === 'fallback');
         }
       })
       .catch(() => {
         setZones(FALLBACK_ZONES);
-        setSelectedZone(FALLBACK_ZONES[0]);
+        setSelectedZone(chooseDefaultZone(FALLBACK_ZONES));
         setIsFallback(true);
       });
   }, []);
@@ -151,6 +154,7 @@ export default function HomePage() {
               windDir={windDir}
               particles={particles}
               onPointBChange={setPointB}
+              currentCondition={selectedZone.current_condition}
             />
           </div>
         </section>

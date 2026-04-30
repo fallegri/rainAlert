@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS predictions_log (
 
 INSERT INTO active_weather_zones (id, zone_name, latitude, longitude, current_condition, last_updated)
 VALUES
+  ('00000000-0000-0000-0000-000000000000', 'Central Santa Cruz de la Sierra', -17.783, -63.182, 'Soleado', NOW()),
   ('1', 'Zona Norte (Lluvia)', -17.720, -63.182, 'Lluvia', NOW()),
   ('2', 'Equipetrol (Nublado)', -17.770, -63.200, 'Nublado', NOW()),
   ('3', 'Plan 3000 (Tormenta)', -17.810, -63.130, 'Tormenta', NOW()),
