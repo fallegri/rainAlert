@@ -17,7 +17,7 @@ interface MapViewProps {
   currentCondition: string;
 }
 
-export default function MapView({ pointA, pointB, windDir, particles, onPointBChange }: MapViewProps) {
+export default function MapView({ pointA, pointB, windDir, particles, onPointBChange, currentCondition }: MapViewProps) {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
