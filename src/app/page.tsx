@@ -48,27 +48,33 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    const endpoint = new URL('/api/zones', window.location.origin).toString();
+    const fetchZones = () => {
+      const endpoint = new URL('/api/zones', window.location.origin).toString();
 
-    fetch(endpoint)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load zones: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (Array.isArray(data.zones) && data.zones.length > 0) {
-          setZones(data.zones);
-          setSelectedZone(chooseDefaultZone(data.zones));
-          setIsFallback(data.source === 'fallback');
-        }
-      })
-      .catch(() => {
-        setZones(FALLBACK_ZONES);
-        setSelectedZone(chooseDefaultZone(FALLBACK_ZONES));
-        setIsFallback(true);
-      });
+      fetch(endpoint, { cache: 'no-store' })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to load zones: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (Array.isArray(data.zones) && data.zones.length > 0) {
+            setZones(data.zones);
+            setSelectedZone(chooseDefaultZone(data.zones));
+            setIsFallback(data.source === 'fallback');
+          }
+        })
+        .catch(() => {
+          setZones(FALLBACK_ZONES);
+          setSelectedZone(chooseDefaultZone(FALLBACK_ZONES));
+          setIsFallback(true);
+        });
+    };
+
+    fetchZones();
+    const interval = setInterval(fetchZones, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
